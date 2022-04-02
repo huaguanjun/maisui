@@ -1,0 +1,9 @@
+.el-table td.el-table__cell, .el-table th.el-table__cell.is-leaf {
+    border-bottom: none;
+}
+.el-table--border .el-table__cell, .el-table__body-wrapper .el-table--border.is-scrolling-left~.el-table__fixed {
+    border-right: none;
+}
+table {
+    margin: 0 !important;
+}

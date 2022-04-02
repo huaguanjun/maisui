@@ -1,0 +1,27 @@
+{
+  "name": "msui-guide",
+  "version": "1.0.0",
+  "description": "msui指南",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vuepress dev docs",
+    "build": "vuepress build docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitee.com/sensen233/msui-guide.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "vuepress": "^1.8.2"
+  },
+  "dependencies": {
+    "async-validator": "^1.11.5",
+    "axios": "^0.24.0",
+    "element-ui": "^2.15.6",
+    "lodash": "^4.17.21",
+    "qs": "^6.10.1"
+  }
+}
