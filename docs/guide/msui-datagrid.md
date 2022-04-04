@@ -127,80 +127,119 @@
 `options`是配置表格的一个对象，我们在上面已经使用过了，下面我来介绍一下它具备的详细功能
 ```js
       this.datagridOptions = {
-        data:  [],
-        index: true,
-        selection: true,
-        expand: true,
-        datagridModel: datagridModel,
-        globalButton: [],
-        inlineButton: [],
+        data:  [], // 表格数据
+        index: true, // 表格索引，默认false
+        selection: true, // 表格是否展示多选款，默认false
+        expand: true, // 表格展开功能，默认false
+        datagridModel: datagridModel, // 表格默认
+        globalButton: [], // 表格的全局按钮
+        inlineButton: [], // 表格的行内按钮
         attrs: {
-           height: 500,
-           loading: false
+            loading: false // 表格loding
+            height: 500, // 表格高度
+            maxHeight: null, // 表格的最大高度，默认值为null
+            stripe:true, // 表格的斑马线展示，默认斑马线展示
+            border: true, // 表格的边框，默认展示边框
+            fit: true, //表格的宽度是否撑满页面，默认撑满
+            showHeader:true, // 是否展示表头，默认展示
+            highlightCurrentRow:false, // 是否高亮展示当前行，默认为false
+            rowClassName: 无默认值，// 当前行的 className 的回调方法，也可以使用字符串为所有行设置一个固定的 className。	Function({row, rowIndex})/String
+            rowSyle: 无默认值，//行的 style 的回调方法，也可以使用一个固定的 Object 为所有行设置一样的 Style。	Function({row, rowIndex})/Object
+            cellClassName: 无默认值，//单元格的 className 的回调方法，也可以使用字符串为所有单元格设置一个固定的 className。	Function({row, column, rowIndex, columnIndex})/String
+            cellStyle: 无默认值，//单元格的 style 的回调方法，也可以使用一个固定的 Object 为所有单元格设置一样的 Style。Function({row, column, rowIndex, columnIndex})/Object
+            headerRowClassName: 无默认值，//表头行的 className 的回调方法，也可以使用字符串为所有表头行设置一个固定的 className。	Function({row, rowIndex})/String
+            headerCellStyle: 无默认值,//表头单元格的 style 的回调方法，也可以使用一个固定的 Object 为所有表头单元格设置一样的 Style。	Function({row, column, rowIndex, columnIndex})/Object
+            headerCellClassName: 无默认值//表头单元格的 className 的回调方法，也可以使用字符串为所有表头单元格设置一个固定的 className。	Function({row, column, rowIndex, columnIndex})/String
+            rowKey: 无默认值//行数据的 Key，用来优化 Table 的渲染；在使用 reserve-selection 功能与显示树形数据时，该属性是必填的。类型为 String 时，支持多层访问：user.info.id，但不支持 user.info[0].id，此种情况请使用 Function。	Function(row)/String
+            expandRowKeys: [], // 可以通过该属性设置 Table 目前的展开行，需要设置 row-key 属性才能使用，该属性为展开行的 keys 数组。	Array
+            defaultExpandAll: false, // 是否展开所有行，默认false
+            emptyText: '暂无数据', //表格无数据时展示文案 默认 '暂无数据'"
+            size: small, // 表格大小默认small
+            tooltipEffect: 'dark', // 表格悬浮时展示文案的背景色，默认值为 'dark'
+            sumText: '合计' // 合计行第一列的文本默认值为合计
+            showSummary: false, //是否在表尾显示合计行
+            summaryMethod: 无默认值, //自定义的合计计算方法 Function({ columns, data })
+            selectOnIndeterminate: true, //在多选表格中，当仅有部分行被选中时，点击表头的多选框时的行为。若为 true，则选中所有行；若为 false，则取消选择所有行
+            indent: 16 // 展示树形数据时，树节点的缩进
+            spanMethod: 无默认值, //合并行或列的计算方法	Function({ row, column, rowIndex, columnIndex })
         },
         datagridFunction:  {
-            cellDblclick: (data, b, dom) => {
-                console.log(data)
+            //当用户手动勾选数据行的 Checkbox 时触发的事件	selection, row
+            select: (selection, row) => {
+
+            },
+            // 当用户手动勾选全选 Checkbox 时触发的事件	selection
+            selectAll (selection) => {
+
+            },
+            // 当选择项发生变化时会触发该事件	selection
+            selectionChange (selection) => {
+
+            },
+            //当单元格 hover 进入时会触发该事件	row, column, cell, event
+            cellMouseEnter (row, column, cell, event) => {
+
+            },
+            // 当单元格 hover 退出时会触发该事件	row, column, cell, event
+            cellMouseLeave (row, column, cell, event) => {
+
+            },
+            // 当某个单元格被点击时会触发该事件	row, column, cell, event
+            cellClick (row, column, cell, event) => {
+
+            },
+            // 当某个单元格被双击击时会触发该事件	row, column, cell, event
+            cellDblclick (row, column, cell, event) => {
+
+            },
+            // 当某一行被点击时会触发该事件	row, column, event
+            rowClick (row, column, event) => {
+
+            },
+            //当某一行被鼠标右键点击时会触发该事件	row, column, event
+            rowContextmenu (row, column, event) => {
+
+            },
+            //当某一行被双击时会触发该事件	row, column, event
+            rowDblclick (row, column, event) => {
+
+            },
+            //当某一列的表头被点击时会触发该事件	column, event
+            headerClick (column, event) => {
+
+            },
+            // 当某一列的表头被鼠标右键点击时触发该事件	column, event
+            headerContextmenu (column, event) => {
+
+            },
+            // 当表格的排序条件发生变化的时候会触发该事件	{ column, prop, order }
+            sortChange ({ column, prop, order }) => {
+
+            },
+            // 当表格的筛选条件发生变化的时候会触发该事件，参数的值是一个对象，对象的 key 是 column 的 columnKey，对应的 value 为用户选择的筛选条件的数组。	filters
+            filterChange ({}) => {
+
+            },
+            //当表格的当前行发生变化的时候会触发该事件，如果要高亮当前行，请打开表格的 highlight-current-row 属性	currentRow, oldCurrentRow
+            currentChange (currentRow, oldCurrentRow) => {
+
+            },
+            //当拖动表头改变了列的宽度的时候会触发该事件	newWidth, oldWidth, column, event
+            headerDragend (newWidth, oldWidth, column, event) => {
+
+            },
+            //当用户对某一行展开或者关闭的时候会触发该事件（展开行时，回调的第二个参数为 expandedRows；树形表格时第二参数为 expanded）	row, (expandedRows | expanded)
+            expandChange (row,expaned) => {
+
             },
         },
       };
 ```
-
-::: tip 提示
-* `loader`参数支持`string`或`Object`类型的参数：
-
-    1. 当参数为`string`类型时，将作为查询后台的接口
-    
-    2. 当参数为`Object`类型时，将自定义查询配置
-        * `url`: `string`请求路径
-        * `method`: `string`请求方法类型
-        * `data`: `Object`请求参数
-        * `success`: `Function`请求成功回调
-        * `error`: `Function`请求失败回调
-        
-    3. 当参数为`MsuiAxios`类型时，表格使用该实例作为请求实例
-
-当然,`modularProxy`的配置不止这些，[查看modularProxy更多配置]()
+::: warning 警告
+* 为了避免`this`的指向的混乱，`datagridFunction`中的函数尽量使用箭头函数去操作
 :::
 
-通过这两个配置能够绘制一个最基础的表格
+## 复杂表格
 
-``` js
-const grid = new MsuiDataGrid({
-    dataModel: gridModel,
-    modularProxy: {
-        loader: {
-            url: '/dataApi/grid.json'
-        }
-    }
-});
-```
+<KNTable/>
 
-### step5.渲染与查询
-
-调用render方法并且传入`string`或`Element`类型的参数。
-::: tip 提示
-如果参数类型为`string`，表格会将该类型的参数作为查询DOM的名称调用`querySelector`方法来获取DOM。\
-如果参数类型为`Element`，表格将会直接使用该类型的参数作为渲染节点。
-:::
-
-``` js
-grid
-    .render('#myFirstGrid')
-    .load();
-```
-
-## 注意事项
-
-::: tip 提示
-
-这是一个自定义的组件
-
-:::
-
-
-
-::: warning 注意
-这是ElementUI的组件
-<el-button>ClickMe</el-button>
-:::

@@ -3,7 +3,7 @@ import 'element-ui/lib/theme-chalk/index.css'
 import './msui-plugins/msui/reset.css'
 
 import MsuiPluginsInstaller from './msui-plugins/export'
-import MsuiPlugins from './msui-plugins/msui/index'
+import MSUI from 'mais-ui'
 
 export default (
     {
@@ -16,5 +16,5 @@ export default (
 ) => {
         Vue.use(ElementUI);
         Vue.use(MsuiPluginsInstaller);
-        Vue.use(MsuiPlugins)
+        Vue.use(MSUI)
 };
