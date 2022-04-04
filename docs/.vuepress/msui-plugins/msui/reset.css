@@ -7,3 +7,7 @@
 table {
     margin: 0 !important;
 }
+.theme-default-content:not(.custom) {
+    max-width: 85%!important;
+    width: 100%;
+}

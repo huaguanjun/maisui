@@ -2,7 +2,7 @@ const sidebarConfig = require('./sidebar');
 const navConfig = require('./nav');
 
 module.exports = {
-    title: 'MSUI指南',
+    title: 'mais-ui|麦穗',
     description: 'MSUI指南',
     port: 2334,
 
