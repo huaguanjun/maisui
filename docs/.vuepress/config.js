@@ -5,7 +5,7 @@ module.exports = {
     title: 'mais-ui|麦穗',
     description: 'MSUI指南',
     port: 8080,
-
+    base: '/maisui/',
     smoothScroll: true,
 
     markdown: {
