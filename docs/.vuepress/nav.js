@@ -15,5 +15,5 @@ module.exports =  [
             }
         ]
     },
-    { text: 'gitHub', link: 'https://www.baidu.com' }
+    { text: 'gitee', link: 'https://gitee.com/huaguanjun/MAISUI' }
 ];
