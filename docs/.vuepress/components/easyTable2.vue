@@ -25,7 +25,8 @@ export default {
         age: "所属类别"
       }),
       pageAttrs: {
-        currentPage: 1
+        currentPage: 1,
+        total: 30
       },
     }
   },
@@ -39,22 +40,19 @@ export default {
     })
   },
   methods: {
-    changeData({ data }, datagridOptions, pageOptions) {
-      datagridOptions.data = data.records;
-      pageOptions.total = data.total;
-    },
-    load(params) {
-      if (params) {
-        params = Object.assign(params, this.params);
-      }
-      this.datagridOptions.attrs.loading = true;
-      this.getList(params).then(({data}) => {
-        this.$emit('changeData', data, this.datagridOptions, this.$refs.msuiPagination)
-        this.datagridOptions.attrs.loading = false;
-      });
-    },
     pageChange(currentPage = 1, pageSize) {
-      this.load({ pageSize, currentPage });
+      debugger
+      let data = []
+      for (let k = 0; k < pageSize; k++) {
+         data.push({
+          name: "ceshi",
+          code: "ceshi",
+          pcode: "ceshi",
+          ctime: "ceshi",
+          userName: 'ceshi'
+        })
+      }
+      this.model.data = data
     },
     initForm(formModel) {
       formModel = new this.MsuiFormModel(formModel);
@@ -92,7 +90,13 @@ export default {
       });
       this.model = {
         datagridModel: model,
-        data: [],
+        data: [{
+          name: "ceshi",
+          code: "ceshi",
+          pcode: "ceshi",
+          ctime: "ceshi",
+          userName: 'ceshi'
+        }],
         attrs: {
             height: 600
         },

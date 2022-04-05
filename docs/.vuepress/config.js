@@ -4,7 +4,7 @@ const navConfig = require('./nav');
 module.exports = {
     title: 'mais-ui|麦穗',
     description: 'MSUI指南',
-    port: 2334,
+    port: 8080,
 
     smoothScroll: true,
 

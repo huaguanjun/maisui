@@ -1,8 +1,6 @@
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css'
 import './msui-plugins/msui/reset.css'
-
-import MsuiPluginsInstaller from './msui-plugins/export'
 import MSUI from 'mais-ui'
 
 export default (
@@ -15,6 +13,5 @@ export default (
     }
 ) => {
         Vue.use(ElementUI);
-        Vue.use(MsuiPluginsInstaller);
         Vue.use(MSUI)
 };
