@@ -22,7 +22,7 @@ module.exports = {
         logo: '/img/logo.png',
         sidebar: 'auto',
         nav: navConfig,
-        // displayAllHeaders: true
+        displayAllHeaders: true,
         lastUpdated: 'Last Updated'
     },
 
