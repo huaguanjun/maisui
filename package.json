@@ -22,7 +22,7 @@
     "axios": "^0.24.0",
     "element-ui": "^2.15.6",
     "lodash": "^4.17.21",
-    "mais-ui": "file:../../mais-ui",
+    "mais-ui": "file:../mais-ui",
     "qs": "^6.10.1"
   }
 }

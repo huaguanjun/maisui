@@ -6,12 +6,24 @@
         </template>
       </msui-form>
     </div>
-    <msui-datagrid class="msui-datagrid" ref="msuiDatagrid" :options="model"></msui-datagrid>
+    <msui-datagrid class="msui-datagrid" ref="msuiDatagrid" :options="model">
+      <template #name="{ row, column, $index, name, curentModel }">
+        <div><el-button size="mini" type="primary">{{row.name}}</el-button></div>
+      </template>
+      <template #expandView="{ row, options }">
+        <component
+            :is="expand"
+            :row="row"
+            :options="options"
+        />
+      </template>
+    </msui-datagrid>
     <msui-pagination class="table-page" ref="msuiPagination" @change="pageChange" :attrs="pageAttrs"/>
   </div>
 </template>
 
 <script>
+import expand from './expanView'
 export default {
   name:'easyTable2',
   data() {
@@ -24,6 +36,7 @@ export default {
         birthday: "所属中心",
         age: "所属类别"
       }),
+      expand: expand,
       pageAttrs: {
         currentPage: 1,
         total: 30
@@ -34,14 +47,13 @@ export default {
     this.initModel({
       name: "分类名称",
       code: "分类代码",
-      pcode: "上级分类编码",
+      pcode: "上级分类编",
       ctime: "创建时间",
       userName: '创建人'
     })
   },
   methods: {
     pageChange(currentPage = 1, pageSize) {
-      debugger
       let data = []
       for (let k = 0; k < pageSize; k++) {
          data.push({
@@ -77,7 +89,6 @@ export default {
         formModel: formModel,
         inline: true,
         save: (data) => {
-          console.log(data)
           this.paramsKeyword = data
         },
         span: 8
@@ -90,6 +101,10 @@ export default {
       });
       this.model = {
         datagridModel: model,
+        index: true,
+        expand: true,
+        selection: true,
+        size:'mini',
         data: [{
           name: "ceshi",
           code: "ceshi",

@@ -243,3 +243,183 @@
 
 复杂表格一般包括表头的筛选功能，分页功能，全局按钮，和行内操作按钮，同时也有可能会使用到插槽
 <easyTable2/>
+### 使用插槽
+```html
+<msui-datagrid class="msui-datagrid" ref="msuiDatagrid" :options="model">
+    <template #name="{ row, column, $index, name, curentModel }">
+        <div>
+            <el-button size="mini" type="primary">{{row.name}}</el-button>
+        </div>
+    </template>
+    <!-- globalButton -->
+    <template #globalButton="{selection}">
+        <div>
+            <el-button size="mini" type="primary">{{row.name}}</el-button>
+        </div>
+    </template>
+    <!-- inLinebutton -->
+    <template #inlineButton>
+      <el-table-column align="center" fixed="right" label="操作" :width="inlineButton.length * 50">
+        <template slot-scope="scope">
+          <template v-for="(item, index) in inlineButton">
+            <el-button
+              :key="index"
+              :title="item.title"
+              :icon="item.icon"
+              v-if="inlineButtonViable(item, scope.row)"
+              :size="item.size || 'mini'"
+              :type="item.type || 'text'"
+              @click="item.clickHandler(scope, data, attrs)"
+            />
+          </template>
+        </template>
+      </el-table-column>
+    </template>
+</msui-datagrid>
+```
+就像上面代码所示，当分类名称需要显示特殊样式时，我们可以使用插槽，来解决表格的样式问题，插槽会带给你的参数如上面代码所示。
+插槽名就是当前列的key值。
+
+### globalButton
+
+```js
+globalButton: [
+    {
+        title: '查询',
+        type: 'primary',
+        size: 'mini',
+        align:'right',
+        icon: 'el-icon-search',
+        clickHandler: (selection) => {
+            this.$refs.form.submitForm()
+        }
+    },
+    {
+        title: '重置',
+        size: 'mini',
+        type: 'danger',
+        icon: 'el-icon-refresh',
+        clickHandler: (selection) => {
+            this.$refs.form.resetForm()
+        }
+    }
+]
+```
+globalButton接收一个数组，数组里面是对象，对象里面包括按钮的基本配置，和点击时执行的函数，点击时的回调参数`selection`时当前选中的数据
+
+### inlineButton
+```js
+inlineButton: [
+    {
+        title: "删除",
+        icon: "el-icon-delete",
+        type: 'text',
+        size: 'mini',
+        clickHandler: (scope, data, attrs) => {
+            console.log(row)
+        },
+        visable: (row) => {
+            return row.name != "小明";
+        },
+    }
+]
+```
+inlineButton接收一个数组，数组里面是对象，对象里面包括按钮的基本配置，和点击时执行的函数，点击时的回调参数是`scope, data, attrs`,
+`visable` 是控制当前按钮显示是否显示
+
+::: tip 提示
+* `globalButton`和`inlineButton`都可以使用`插槽`去配置，当函数式的配置无法满足你的需求时你可以使用`插槽`方式进行配置,它们的插槽名就是`globalButton`和`inlineButton`,具体配置方式参考插槽使用demo
+:::
+
+### expand
+```js
+{
+    expand: true
+}
+```
+当expan配置为ture的时候,在msui-datagrid中必须配置一个名为`expandview`的插槽
+```html
+<msui-datagrid>
+    <!-- expandView -->
+    <template #expandView="{ row, options }">
+        <component
+            :is="expanView"
+            :row="row"
+            :options="options"
+        />
+    </template>
+</msui-datagrid>
+```
+### index
+
+```js
+{
+    index: {
+        label: '序号',
+        width: 100,
+        align: 'center',
+        indexMethod: (index) => {
+            return index + 1
+        }
+    }
+}
+
+```
+列表的序号可以简单的配置成一个Boolean值，但当简单的布尔值满足不了你的需求时，你可以把index配置成一个对象，对index进行一些处理
+
+### selection
+```js
+{
+    selection: {
+        width: 100,
+        align: ' center'
+    }
+}
+```
+列表的多选框可以简单的配置成一个Boolean值，但当简单的布尔值满足不了你的需求时，你可以把selection配置成一个对象，对selection进行一些处理
+
+### 表格方法
+```html
+<template>
+  <div>
+    <msui-datagrid @rowClick="rowClick" :options="datagridOptions"/>
+  </div>
+</template>
+<script>
+export default {
+  data() {
+    return {
+      datagridOptions: this.initDatagridModel({
+        name: "姓名",
+        sex: "性别",
+        hobbies: "爱好",
+        job: "工作",
+      }),
+    };
+  },
+  methods: {
+    rowClick(a, bc, d, c) {
+      console.log(a, bc, d, c);
+    },
+    initDatagridModel(model) {
+      const datagridModel = new this.MsuiDataGridModel({
+        dataModel: model,
+        align: "center"
+      });
+      return {
+        datagridModel,
+        data: [{sex: 1, name: "小明", hobbies: "唱歌", job: "程序员"}],
+        datagridFunction: {
+          rowClick: (a, b, c, d) => {
+            console.log(a, b, c, d);
+          },
+        },
+      };
+    },
+  },
+};
+</script>
+```
+::: tip
+就像上面写的`rowClick`方法，你可以把它配置在`datagridFunction`中也可以把它绑定到`template`结构上，然后在`methods`中定义此方法，使用方式任选一种，建议使用`datagridFunction`去配置
+:::

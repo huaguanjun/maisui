@@ -5,15 +5,15 @@ module.exports =  [
     },
     {
         text: '指南',
-        items: [
-            {
-                text: '数据展示',
-                items: [
-                    {text: '创建表格', link: '/guide/msui-datagrid'},
-                    {text: '创建表单', link: '/guide/msui-form'}
-                ]
-            }
-        ]
+            items: [
+                {text: 'table', link: '/guide/msui-datagrid'},
+                {text: 'form', link: '/guide/msui-form'},
+                {text: 'dialog', link: '/guide/msui-dialog'},
+                {text: 'input', link: '/guide/msui-input'},
+                {text: 'selectBox', link: '/guide/msui-selectBox'},
+                {text: 'dataTimePick', link: '/guide/msui-datatimePick'},
+                {text: 'pagination', link: '/guide/msui-pagination'}
+            ]
     },
     { text: 'gitee', link: 'https://gitee.com/huaguanjun/MAISUI' }
 ];

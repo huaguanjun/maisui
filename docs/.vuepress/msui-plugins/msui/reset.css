@@ -8,6 +8,6 @@ table {
     margin: 0 !important;
 }
 .theme-default-content:not(.custom) {
-    max-width: 85%!important;
+    max-width: 70%!important;
     width: 100%;
 }
