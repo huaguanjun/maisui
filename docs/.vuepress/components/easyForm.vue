@@ -14,6 +14,8 @@ export default {
         age: "年龄",
         hobby: "爱好",
         gongzuo: "工作",
+        tel: '电话',
+        school: '学校'
       })
     };
   },
@@ -26,7 +28,8 @@ export default {
         size: "small",
         disabled: false,
         formModel: formModel,
-        inline: true
+        inline: false,
+        span: 6
       };
     },
   },

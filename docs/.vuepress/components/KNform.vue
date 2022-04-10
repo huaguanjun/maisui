@@ -1,39 +1,12 @@
 <template>
-  <div style="height: 100%; overflow: auto">
-    <el-col :span="1">
-      <msui-form ref="form1" :options="form1">
-        <template #save> </template>
-      </msui-form>
-    </el-col>
-    <el-col :span="23" style="margin-bottom: 30px">
-      <msui-form ref="form2" :options="form2">
-        <template #save> </template>
-      </msui-form>
-    </el-col>
-    <msui-form ref="form3" :options="form3">
-      <template #manifest="{ item }">
-        <div class="special-form-box">
-          <div class="title">
-            <div class="main-title">manifest文件</div>
-            <span><span style="color: red">*</span>限两张</span>
-          </div>
-          <div style="padding-left: 10px">
-            应用配置文件(不超过1MB),包含应用及模块组件配置信息
-          </div>
-          <div style="padding-left: 10px">
-            <component
-              v-model="item.value"
-              :is="item.render()"
-              :attrs="item.getAttrs()"
-            />
-          </div>
-        </div>
-      </template>
+  <div style="margin-top: 30px;">
+    <msui-form ref="form1" :options="form1"/>
+    <msui-form ref="form2" :options="form2">
       <template #img="{ item }">
         <div class="special-form-box">
           <div class="title">
             <div class="main-title">应用预览图</div>
-            <span><span style="color: red">*</span>限两张</span>
+            <span style="color:black"><span style="color: red">*</span>限两张</span>
           </div>
           <div style="padding-left: 10px">
             应用预览图(不超过1MB),包含应用及模块组件配置信息
@@ -48,7 +21,7 @@
         </div>
       </template>
       <template #jingxiang="{ item }">
-        <div class="special-form-box jingxiang">
+        <div class="special-form-box">
           <div class="title">
             <div class="main-title">镜像列表</div>
           </div>
@@ -89,204 +62,87 @@
 export default {
   name: "myForm",
   data() {
+    const generateData = _ => {
+        const data = [];
+        const cities = ['上海', '北京', '广州', '深圳', '南京', '西安', '成都'];
+        const pinyin = ['shanghai', 'beijing', 'guangzhou', 'shenzhen', 'nanjing', 'xian', 'chengdu'];
+        cities.forEach((city, index) => {
+          data.push({
+            label: city,
+            key: index,
+            pinyin: pinyin[index]
+          });
+        });
+        return data;
+      };
     return {
+      transferData: generateData(),
       loading: false,
-      form1: this.initForm2({
-        imgUrl: "应用图标",
-      }),
-      form2: this.initForm1({
-        manufacturer: "开发厂商",
-        version: "当前版本",
-        group: "所属集群",
-        deploymentName: "部署名称",
-        appName: "应用名称",
-        appCode: "应用编码",
-        kind: "所属专业",
-        type: "所属类别",
-        url: "URL",
-        desc: "应用描述",
-      }),
-      form3: this.initForm3({
-        img: "", // 应用预览图
-        manifest: "", // "manifest文件"
-        jingxiang: "", // 镜像列表
-        actor: "", //角色授权
-      }),
+      form1: this.initForm1({manufacturer: "开发厂商",version: "当前版本",group: "所属集群",deploymentName: "部署名称",appName: "应用名称",appCode: "应用编码",kind: "所属专业",type: "所属类别",url: "URL",desc: "应用描述",}),
+      form2: this.initForm2({img: "",jingxiang: "",actor: ""}),
       result: {},
-    };
-  },
-  mounted() {
-    this.postForm = (data) => {
-      return this.$http.post(`${this.$api.PRE}/appRegister/addApp`, data);
-    };
-    this.imgUrlPost = (data) => {
-      return this.$http.post(`${this.$api.PRE}/appRegister/addAppImgUrl`, data);
     };
   },
   methods: {
     resetForm() {
-      const refs = ["form1", "form3", "form2"];
+      const refs = ["form1", "form2"];
       refs.forEach((item) => {
         this.$refs[item].resetForm();
       });
       this.result = {};
     },
     submitForm() {
-      const refs = ["form1", "form3", "form2"];
+      const refs = ["form1", "form2"];
       refs.forEach((item) => {
         this.$refs[item].submitForm();
       });
       const currentData = Object.assign(
         {},
         this.form1.formModel,
-        this.form2.formModel,
-        this.form3.formModel
+        this.form2.formModel
       );
 
-      if (Object.keys(currentData).length === Object.keys(this.result).length - 2) {
+      if (Object.keys(currentData).length === Object.keys(this.result).length) {
         this.loading = true;
         const result = this.MsuiUtils.cloneDeep(this.result);
-        result.imgUrl = result.imgUrl.map((item) => item.url)[0];
-        result.img = result.img.map((item) => {
-          return {
-            img: item.url,
-            tenantCode: result.appCode,
-          };
-        });
-        this.postForm(result)
-          .then(() => {
-            return this.imgUrlPost([...result.img]);
-          })
-          .finally(() => {
-            this.loading = false;
-          });
+        alert(result)
       }
     },
     initForm1(formModel) {
       formModel = new this.MsuiFormModel(formModel);
-      formModel.addRules([
-        { required: true, message: "必填字段不能为空", trigger: "blur" },
-      ]);
-      formModel.desc.type({
-        type: "textarea",
-        span: 24,
-        rows: 8,
-      });
-      formModel.type.type(
-        {
+      formModel.addRules([{ required: true, message: "必填字段不能为空", trigger: "blur" }]);
+      formModel.desc.type({type: "textarea",span: 24, rows: 8});
+      formModel.type.type({
           options: [
-            {
-              label: "基础管理",
-              value: "基础管理",
-            },
-            {
-              label: "分析决策",
-              value: "分析决策",
-            },
-            {
-              label: "作业管理",
-              value: "作业管理",
-            },
-            {
-              label: "设备管理",
-              value: "设备管理",
-            },
-          ],
-        },
-        "Msui-SelectBox"
-      );
+            {label: "基础管理", value: "基础管理"},
+            {label: "分析决策", value: "分析决策"},
+            {label: "作业管理", value: "作业管理"}
+          ]
+        },"Msui-SelectBox");
       formModel.kind.type(
         {
           options: [
-            {
-              label: "输电专业",
-              value: "ts",
-            },
-            {
-              label: "变电专业",
-              value: "t",
-            },
-            {
-              label: "直流专业",
-              value: "dc",
-            },
-            {
-              label: "配电专业",
-              value: "ds",
-            },
-            {
-              label: "技术专业",
-              value: "tc",
-            },
-            {
-              label: "计划专业",
-              value: "pl",
-            },
-            {
-              label: "综合专业",
-              value: "im",
-            },
+            {label: "输电专业",value: "ts"},
+            {label: "变电专业",value: "t"},
+            {label: "直流专业",value: "dc"}
           ],
-        },
-        "Msui-SelectBox"
-      );
+        },"Msui-SelectBox");
       return {
-        labelWidth: "200px",
+        labelWidth: "100px",
         labelPosition: "right",
         size: "small",
         disabled: false,
         formModel: formModel,
         inline: false,
         save: (res) => {
-          res.userId = this.$store.getters["userId"];
-          res.userName = this.$store.getters["username"];
           this.result = Object.assign({}, this.result, res);
         },
+        showButton: false,
         span: 8,
       };
     },
     initForm2(formModel) {
       formModel = new this.MsuiFormModel(formModel);
-      formModel.addRules([
-        { required: true, message: "必填字段不能为空", trigger: "blur" },
-      ]);
-      formModel.imgUrl.type(
-        {
-          limit: 1,
-          beforeUpload: (file) => {
-            if (file.size / 1024 > 50 || file.raw.type.indexOf("image") < 0) {
-              this.$message({
-                type: "error",
-                message: "上传的图标大小要小于50KB",
-              });
-              return false;
-            }
-            return true;
-          },
-        },
-        "msui-upload"
-      );
-      return {
-        labelWidth: "1",
-        labelPosition: "right",
-        size: "small",
-        disabled: false,
-        formModel: formModel,
-        inline: true,
-        save: (res) => {
-          this.result = Object.assign({}, this.result, res);
-        },
-        span: 24,
-      };
-    },
-    initForm3(formModel) {
-      formModel = new this.MsuiFormModel(formModel);
-      formModel.manifest.type(
-        {
-          limit: 2,
-        },
-        "msui-upload"
-      );
       formModel.img.type(
         {
           limit: 2,
@@ -326,12 +182,7 @@ export default {
         },
         "msui-datagrid"
       );
-      formModel.actor.type(
-        {
-          limit: 2,
-        },
-        "msui-upload"
-      );
+      formModel.actor.type({limit: 2, span: 24});
       return {
         labelWidth: "0",
         labelPosition: "right",
@@ -342,6 +193,7 @@ export default {
         save: (res) => {
           this.result = Object.assign({}, this.result, res);
         },
+        showButton: false,
         span: 12,
       };
     },
@@ -360,7 +212,7 @@ export default {
   border: 1px solid #ccc;
   display: flex;
   flex-direction: column;
-  margin: 10px;
+  margin-left: 10px;
 }
 .special-form-box.jingxiang {
   height: 350px;
@@ -374,7 +226,7 @@ export default {
   color: white;
 }
 .main-title {
-  background: rgb(13, 134, 127);
+  background: #409EFF;
   text-align: center;
   flex: 0 0 150px;
   padding: 0 10px;
