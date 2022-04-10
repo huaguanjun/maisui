@@ -1,5 +1,5 @@
 <template>
-    <el-form inline class="demo-table-expand">
+    <el-form class="demo-table-expand">
           <el-form-item
                v-for="item in options"
                :key="item.prop"
@@ -36,7 +36,7 @@ export default {
   .demo-table-expand .el-form-item {
     margin-right: 0;
     margin-bottom: 0;
-    width: 20%;
+    width: 50%;
   }
 
 </style>

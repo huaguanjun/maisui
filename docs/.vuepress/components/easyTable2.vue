@@ -1,10 +1,7 @@
 <template>
   <div class="model-right">
     <div class="table-header">
-      <msui-form :options="form" ref="form">
-        <template #save>
-        </template>
-      </msui-form>
+      <msui-form :options="form" ref="form"/>
     </div>
     <msui-datagrid class="msui-datagrid" ref="msuiDatagrid" :options="model">
       <template #name="{ row, column, $index, name, curentModel }">
@@ -31,10 +28,10 @@ export default {
       model: {},
       paramsKeyword: {},
       form: this.initForm({
-        name: "应用名称",
-        sex: "所属专业",
-        birthday: "所属中心",
-        age: "所属类别"
+        sex: "性别",
+        birthday: "爱好",
+        age: "年龄",
+        name: "姓名"
       }),
       expand: expand,
       pageAttrs: {
@@ -45,23 +42,24 @@ export default {
   },
   created() {
     this.initModel({
-      name: "分类名称",
-      code: "分类代码",
-      pcode: "上级分类编",
-      ctime: "创建时间",
-      userName: '创建人'
+      name: "姓名",
+      code: "爱好",
+      pcode: "年龄",
+      ctime: "家乡",
+      userName: '职业'
     })
   },
   methods: {
-    pageChange(currentPage = 1, pageSize) {
+    pageChange(currentPage = 1, pageSize = 20) {
+      debugger
       let data = []
       for (let k = 0; k < pageSize; k++) {
          data.push({
-          name: "ceshi",
-          code: "ceshi",
-          pcode: "ceshi",
-          ctime: "ceshi",
-          userName: 'ceshi'
+          name: "小花",
+          code: "唱歌，骑行，跑步",
+          pcode: "18",
+          ctime: "徐州",
+          userName: '码农'
         })
       }
       this.model.data = data
@@ -69,29 +67,24 @@ export default {
     initForm(formModel) {
       formModel = new this.MsuiFormModel(formModel);
 
-      formModel.sex.type(
-        {},
-        "msui-selectBox"
-      );
-      formModel.birthday.type(
-        {},
-        "msui-selectBox"
-      );
-      formModel.age.type(
-        {},
-        "msui-selectBox"
-      );
+      formModel.sex.type({
+        options: [{value: 0, label: '女'},{value: 1, label: '男'}]
+      },"msui-selectBox");
+      formModel.birthday.type({
+        options: [{value: '骑行', label: '骑行'},{value: '唱歌', label: '唱歌'},{value: '音乐节', label: '音乐节'}]
+      },"msui-selectBox");
       return {
-        labelWidth: "75px",
+        labelWidth: "45px",
         labelPosition: "right",
         size: "small",
         disabled: false,
         formModel: formModel,
-        inline: true,
+        inline: false,
+        showButton: false,
         save: (data) => {
           this.paramsKeyword = data
         },
-        span: 8
+        span: 6
       };
     },
     initModel(dataModel) {
@@ -105,13 +98,7 @@ export default {
         expand: true,
         selection: true,
         size:'mini',
-        data: [{
-          name: "ceshi",
-          code: "ceshi",
-          pcode: "ceshi",
-          ctime: "ceshi",
-          userName: 'ceshi'
-        }],
+        data: [],
         attrs: {
             height: 600
         },
@@ -137,7 +124,7 @@ export default {
             }
           },
           {
-            title: '上架',
+            title: '新增',
             type: 'primary',
             size: 'mini',
             icon: 'el-icon-circle-plus-outline',
@@ -146,7 +133,7 @@ export default {
             }
           },
           {
-            title: '下架',
+            title: '删除',
             size: 'mini',
             icon: 'el-icon-remove-outline',
             clickHandler: () => {
@@ -164,6 +151,7 @@ export default {
         ],
         datagridFunction: {}
       };
+      this.pageChange()
     }
   }
 }

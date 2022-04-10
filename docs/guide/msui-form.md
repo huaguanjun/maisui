@@ -1,6 +1,4 @@
 # 表单
-用于提交数据
-
 ## 基础表单
 
 基础的表格展示用法。
@@ -76,6 +74,8 @@ export default {
     * `inline: true` 是否为inline属性的表单
     * `span: 4` 表单一个属性所占的宽度,最大值为24 number
     * `showButton: false` 是否展示保存和重置按钮,默认值true
+    * `save: (result) => {}` 在执行保存逻辑时会执行到这里
+    * `reset: () => {}` 在执行表单重置逻辑时会执行到这里
 
 :::
 
@@ -152,8 +152,11 @@ this.$refs.form.resetForm() // 重置表单
 this.$refs.form.submitForm() // 提交表单
 ```
 ## 复杂表单
+
 <KNform/>
+
 贴上实现代码
+
 ```html
 <template>
   <div style="margin-top: 30px;">
@@ -197,12 +200,7 @@ this.$refs.form.submitForm() // 提交表单
             <div class="main-title">角色授权</div>
           </div>
           <div style="padding-left: 10px; margin: 0 auto">
-            <component
-              v-model="item.value"
-              :is="item.render()"
-              :options="item.getAttrs()"
-              :data="transferData"
-            />
+            <el-transfer v-model="item.value" :data="transferData"></el-transfer>
           </div>
         </div>
       </template>
@@ -240,12 +238,37 @@ export default {
     return {
       transferData: generateData(),
       loading: false,
-      form1: this.initForm1({manufacturer: "开发厂商",version: "当前版本",group: "所属集群",deploymentName: "部署名称",appName: "应用名称",appCode: "应用编码",kind: "所属专业",type: "所属类别",url: "URL",desc: "应用描述"}),
+      form1: this.initForm1({manufacturer: "开发厂商",version: "当前版本",group: "所属集群",deploymentName: "部署名称",appName: "应用名称",appCode: "应用编码",kind: "所属专业",type: "所属类别",url: "URL",desc: "应用描述",}),
       form2: this.initForm2({img: "",jingxiang: "",actor: ""}),
       result: {},
     };
   },
   methods: {
+    resetForm() {
+      const refs = ["form1", "form2"];
+      refs.forEach((item) => {
+        this.$refs[item].resetForm();
+      });
+      this.result = {};
+    },
+    submitForm() {
+      const refs = ["form1", "form2"];
+      refs.forEach((item) => {
+        this.$refs[item].submitForm();
+      });
+      const currentData = Object.assign(
+        {},
+        this.form1.formModel,
+        this.form2.formModel
+      );
+      if (Object.keys(currentData).length === Object.keys(this.result).length) {
+        this.loading = true;
+        const result = this.MsuiUtils.cloneDeep(this.result);
+        console.log(result)
+        alert('提交结果在控制台输出')
+        this.loading = false;
+      }
+    },
     initForm1(formModel) {
       formModel = new this.MsuiFormModel(formModel);
       formModel.addRules([{ required: true, message: "必填字段不能为空", trigger: "blur" }]);
@@ -260,9 +283,9 @@ export default {
       formModel.kind.type(
         {
           options: [
-            {label: "输电专业",value: "ts"},
-            {label: "变电专业",value: "t"},
-            {label: "直流专业",value: "dc"}
+            {label: "输电专业", value: "ts"},
+            {label: "变电专业", value: "t" },
+            {label: "直流专业", value: "dc"}
           ],
         },"Msui-SelectBox");
       return {
@@ -320,8 +343,7 @@ export default {
         },
         "msui-datagrid"
       );
-      debugger
-      formModel.actor.type({limit: 2, span: 24}, 'el-transfer').setValue([1,2]);
+      formModel.actor.setValue([]);
       return {
         labelWidth: "0",
         labelPosition: "right",
@@ -341,29 +363,6 @@ export default {
         dataModel,
         align: "left",
       });
-    },
-    //重置表单
-    resetForm() {
-      const refs = ["form1", "form2"];
-      refs.forEach((item) => {
-        this.$refs[item].resetForm();
-      });
-      this.result = {};
-    },
-
-    //提交表单
-    submitForm() {
-      const refs = ["form1", "form2"];
-      refs.forEach((item) => {
-        this.$refs[item].submitForm();
-      });
-      const currentData = Object.assign({}, this.form1.formModel, this.form2.formModel);
-
-      if (Object.keys(currentData).length === Object.keys(this.result).length) {
-        this.loading = true;
-        const result = this.MsuiUtils.cloneDeep(this.result);
-        alert(result)
-      }
     },
   },
 };
@@ -399,5 +398,110 @@ export default {
   font-size: 14px;
 }
 </style>
-
 ```
+::: tip
+  我们可以看到，在`穿梭框`的使用上,我们使用了插槽，为什么会使用插槽呢，因为麦穗并没有对`穿梭框`进行封装，但我们在使用表单时肯定会遇到一些奇怪的表单组件这个时候就需要我们使用插槽来解决特殊元素的处理。在下面我们会把这部分代码单独拆出来介绍。
+:::
+
+### 表单插槽使用
+
+```html
+<template #actor="{ item }">
+  <div class="special-form-box jingxiang">
+    <div class="title">
+      <div class="main-title">角色授权</div>
+    </div>
+    <div style="padding-left: 10px; margin: 0 auto">
+      <el-transfer v-model="item.value" :data="transferData"></el-transfer>
+    </div>
+  </div>
+</template>
+<script>
+export default {
+  method: {
+    initForm(formModel) {
+        formModel = new this.MsuiFormModel(formModel);
+        formModel.actor.setValue([]);
+    }
+  }
+}
+</script>
+```
+::: tip
+   在进行表单初始化时我们会对表单绑定的值进行初始化，因为对特殊组件绑定值类型的不确定，所以我们一定要给特殊元素绑定的值设置一个初始值
+   `formModel.actor.setValue([]);`
+:::
+
+### 复杂表单保存逻辑
+```html
+<template #save>
+  <el-col :span="24" style="text-align: center">
+    <el-form-item>
+      <el-button @click="resetForm">重置</el-button>
+      <el-button @click="submitForm" type="primary" :loading="loading"
+        >保存</el-button
+      >
+    </el-form-item>
+  </el-col>
+</template>
+<script>
+export default {
+  method: {
+    //重置表单
+    resetForm() {
+      const refs = ["form1", "form2"];
+      refs.forEach((item) => {
+        this.$refs[item].resetForm();
+      });
+      this.result = {};
+    },
+
+    // 保存表单
+    submitForm() {
+      const refs = ["form1", "form2"];
+      refs.forEach((item) => {
+        this.$refs[item].submitForm();
+      });
+
+      //表单实际的对象长度
+      const currentData = Object.assign(
+        {},
+        this.form1.formModel,
+        this.form2.formModel
+      );
+
+      // 表单的实际长度和this.result的长度做对比
+      if (Object.keys(currentData).length === Object.keys(this.result).length) {
+        this.loading = true;
+        const result = this.MsuiUtils.cloneDeep(this.result);
+        console.log(result)
+        alert('提交结果在控制台输出')
+        this.loading = false;
+      }
+    },
+    initForm1() {
+      return {
+        save: (result) => {
+          this.result = Object.assign(this.result, result)
+        }
+      }
+    },
+    initForm2() {
+      return {
+        save: (result) => {
+          this.result = Object.assign(this.result, result)
+        },
+        reset: () => {
+          // 当表单进行重置时的回调函数
+        }
+      }
+    }
+  }
+}
+</script>
+```
+::: tip
+  有时候表单的样式很复杂这个时候一个msui-form可能解决不了表单样式的问题，如上面的复杂例子所示，这个时候可能会需要使用到多个msui-form
+  在这个时候保存表单的逻辑会变得复杂一点，我们把上面的保存逻辑单独拿出来看一下,如上面的代码所示，当我们在执行这个复杂表单的保存逻辑时，我们进行了循环
+  执行了每个个form的保存逻辑，当验证通过时，他会执行我们在配置表单时配置的回调函数`save`,当获取的result长度和form的实际长度相等时我们进行保存逻辑的执行。
+:::

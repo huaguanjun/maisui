@@ -101,11 +101,12 @@ export default {
         this.form1.formModel,
         this.form2.formModel
       );
-
       if (Object.keys(currentData).length === Object.keys(this.result).length) {
         this.loading = true;
         const result = this.MsuiUtils.cloneDeep(this.result);
-        alert(result)
+        console.log(result)
+        alert('提交结果在控制台输出')
+        this.loading = false;
       }
     },
     initForm1(formModel) {
@@ -122,9 +123,9 @@ export default {
       formModel.kind.type(
         {
           options: [
-            {label: "输电专业",value: "ts"},
-            {label: "变电专业",value: "t"},
-            {label: "直流专业",value: "dc"}
+            {label: "输电专业", value: "ts"},
+            {label: "变电专业", value: "t" },
+            {label: "直流专业", value: "dc"}
           ],
         },"Msui-SelectBox");
       return {
@@ -182,7 +183,7 @@ export default {
         },
         "msui-datagrid"
       );
-      formModel.actor.type({limit: 2, span: 24});
+      formModel.actor.type({limit: 2, span: 24}).setValue([]);
       return {
         labelWidth: "0",
         labelPosition: "right",
