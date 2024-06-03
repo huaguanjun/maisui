@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>资源入口点改造 | mais-ui|麦穗</title>
+    <meta name="generator" content="VuePress 1.9.7">
+    
+    <meta name="description" content="MSUI指南">
+    
+    <link rel="preload" href="/maisui/assets/css/0.styles.459cdd5b.css" as="style"><link rel="preload" href="/maisui/assets/js/app.44ceb48a.js" as="script"><link rel="preload" href="/maisui/assets/js/2.ceec1bf4.js" as="script"><link rel="preload" href="/maisui/assets/js/17.dbdebba0.js" as="script"><link rel="prefetch" href="/maisui/assets/js/10.a97ba1a7.js"><link rel="prefetch" href="/maisui/assets/js/11.259eb810.js"><link rel="prefetch" href="/maisui/assets/js/12.5a4d6f6f.js"><link rel="prefetch" href="/maisui/assets/js/13.654df8d3.js"><link rel="prefetch" href="/maisui/assets/js/14.0727f82e.js"><link rel="prefetch" href="/maisui/assets/js/15.d58eb8f0.js"><link rel="prefetch" href="/maisui/assets/js/16.f9f54f55.js"><link rel="prefetch" href="/maisui/assets/js/18.b402bbe5.js"><link rel="prefetch" href="/maisui/assets/js/19.3f5718a3.js"><link rel="prefetch" href="/maisui/assets/js/20.170c89da.js"><link rel="prefetch" href="/maisui/assets/js/21.0cc356aa.js"><link rel="prefetch" href="/maisui/assets/js/22.6e76154c.js"><link rel="prefetch" href="/maisui/assets/js/23.7680667e.js"><link rel="prefetch" href="/maisui/assets/js/24.9848ebcd.js"><link rel="prefetch" href="/maisui/assets/js/25.cc60bce2.js"><link rel="prefetch" href="/maisui/assets/js/26.3315031b.js"><link rel="prefetch" href="/maisui/assets/js/3.f3651bad.js"><link rel="prefetch" href="/maisui/assets/js/4.b777b4d3.js"><link rel="prefetch" href="/maisui/assets/js/5.d98d33a9.js"><link rel="prefetch" href="/maisui/assets/js/6.f48e3ebc.js"><link rel="prefetch" href="/maisui/assets/js/7.bae89cc5.js"><link rel="prefetch" href="/maisui/assets/js/8.38522f0f.js"><link rel="prefetch" href="/maisui/assets/js/9.b1dbd9a7.js">
+    <link rel="stylesheet" href="/maisui/assets/css/0.styles.459cdd5b.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/maisui/" class="home-link router-link-active"><img src="/maisui/img/logo.png" alt="mais-ui|麦穗" class="logo"> <span class="site-name can-hide">mais-ui|麦穗</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/maisui/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="指南" class="dropdown-title"><span class="title">指南</span> <span class="arrow down"></span></button> <button type="button" aria-label="指南" class="mobile-dropdown-title"><span class="title">指南</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/maisui/guide/msui-datagrid.html" class="nav-link">
+  table
+</a></li><li class="dropdown-item"><!----> <a href="/maisui/guide/msui-form.html" class="nav-link">
+  form
+</a></li><li class="dropdown-item"><!----> <a href="/maisui/guide/msui-dialog.html" class="nav-link">
+  dialog
+</a></li><li class="dropdown-item"><!----> <a href="/maisui/guide/msui-input.html" class="nav-link">
+  input
+</a></li><li class="dropdown-item"><!----> <a href="/maisui/guide/msui-selectBox.html" class="nav-link">
+  selectBox
+</a></li><li class="dropdown-item"><!----> <a href="/maisui/guide/msui-datatimePick.html" class="nav-link">
+  dataTimePick
+</a></li><li class="dropdown-item"><!----> <a href="/maisui/guide/msui-pagination.html" class="nav-link">
+  pagination
+</a></li></ul></div></div><div class="nav-item"><a href="https://gitee.com/huaguanjun/MAISUI" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  gitee
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/maisui/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="指南" class="dropdown-title"><span class="title">指南</span> <span class="arrow down"></span></button> <button type="button" aria-label="指南" class="mobile-dropdown-title"><span class="title">指南</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/maisui/guide/msui-datagrid.html" class="nav-link">
+  table
+</a></li><li class="dropdown-item"><!----> <a href="/maisui/guide/msui-form.html" class="nav-link">
+  form
+</a></li><li class="dropdown-item"><!----> <a href="/maisui/guide/msui-dialog.html" class="nav-link">
+  dialog
+</a></li><li class="dropdown-item"><!----> <a href="/maisui/guide/msui-input.html" class="nav-link">
+  input
+</a></li><li class="dropdown-item"><!----> <a href="/maisui/guide/msui-selectBox.html" class="nav-link">
+  selectBox
+</a></li><li class="dropdown-item"><!----> <a href="/maisui/guide/msui-datatimePick.html" class="nav-link">
+  dataTimePick
+</a></li><li class="dropdown-item"><!----> <a href="/maisui/guide/msui-pagination.html" class="nav-link">
+  pagination
+</a></li></ul></div></div><div class="nav-item"><a href="https://gitee.com/huaguanjun/MAISUI" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  gitee
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>资源入口点改造</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/maisui/FAQ/resourcen-entry.html#_1-添加依赖" class="sidebar-link">1. 添加依赖</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/maisui/FAQ/resourcen-entry.html#_2-使用组件" class="sidebar-link">2. 使用组件</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/maisui/FAQ/resourcen-entry.html#_3-添加左侧树数据集" class="sidebar-link">3. 添加左侧树数据集</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/maisui/FAQ/resourcen-entry.html#_4-添加点击事件" class="sidebar-link">4. 添加点击事件</a><ul class="sidebar-sub-headers"></ul></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="资源入口点改造"><a href="#资源入口点改造" class="header-anchor">#</a> 资源入口点改造</h1> <h2 id="_1-添加依赖"><a href="#_1-添加依赖" class="header-anchor">#</a> 1. 添加依赖</h2> <div class="language-js line-numbers-mode"><div class="highlight-lines"><div class="highlighted"> </div><br><div class="highlighted"> </div><div class="highlighted"> </div><div class="highlighted"> </div><br><br></div><pre class="language-js"><code><span class="token keyword">import</span> <span class="token punctuation">{</span>exportComponents<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'msui-platform'</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+    <span class="token literal-property property">components</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token literal-property property">ResourceEntry</span><span class="token operator">:</span> exportComponents<span class="token punctuation">.</span>ResourceEntry
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><h2 id="_2-使用组件"><a href="#_2-使用组件" class="header-anchor">#</a> 2. 使用组件</h2> <p>在<code>template</code>标签中使用<code>ResourceEntry</code>组件</p> <div class="language-html line-numbers-mode"><div class="highlight-lines"><br><div class="highlighted"> </div><div class="highlighted"> </div><div class="highlighted"> </div><div class="highlighted"> </div><br><br></div><pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>right<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ResourceEntry</span>
+        <span class="token attr-name">ref</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>resEntry<span class="token punctuation">&quot;</span></span>
+    <span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ResourceEntry</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+</code></pre><div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><h2 id="_3-添加左侧树数据集"><a href="#_3-添加左侧树数据集" class="header-anchor">#</a> 3. 添加左侧树数据集</h2> <p>配置左侧菜单渲染的页面</p> <div class="language-js line-numbers-mode"><div class="highlight-lines"><br><br><br><div class="highlighted"> </div><br><br><br><div class="highlighted"> </div><br><br><br><div class="highlighted"> </div><br><br><br><div class="highlighted"> </div><br><br><br></div><pre class="language-js"><code><span class="token literal-property property">modelList</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+        <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">'通信电源缺陷'</span><span class="token punctuation">,</span>
+        <span class="token function-variable function">component</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">'./defectPowerNeRuleList'</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+        <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">'光缆故障缺陷'</span><span class="token punctuation">,</span>
+        <span class="token function-variable function">component</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">'./defectFiberRuleList'</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+        <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">'传输设备缺陷'</span><span class="token punctuation">,</span>
+        <span class="token function-variable function">component</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">'./defectSdhNeRuleList'</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+        <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">'机房环境缺陷'</span><span class="token punctuation">,</span>
+        <span class="token function-variable function">component</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">'./defectRoomRuleList'</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+</code></pre><div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br></div></div><h2 id="_4-添加点击事件"><a href="#_4-添加点击事件" class="header-anchor">#</a> 4. 添加点击事件</h2> <div class="language-js line-numbers-mode"><div class="highlight-lines"><br><div class="highlighted"> </div><div class="highlighted"> </div><div class="highlighted"> </div><div class="highlighted"> </div><div class="highlighted"> </div><div class="highlighted"> </div><div class="highlighted"> </div><div class="highlighted"> </div><div class="highlighted"> </div><div class="highlighted"> </div><div class="highlighted"> </div><div class="highlighted"> </div><div class="highlighted"> </div><div class="highlighted"> </div><div class="highlighted"> </div><div class="highlighted"> </div><div class="highlighted"> </div><br><br></div><pre class="language-js"><code><span class="token literal-property property">methods</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token function">openModelPage</span><span class="token punctuation">(</span><span class="token parameter">index</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">const</span> curModel <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>modelList<span class="token punctuation">[</span>index<span class="token punctuation">]</span><span class="token punctuation">,</span>
+              modelComponent <span class="token operator">=</span> curModel<span class="token punctuation">.</span>component<span class="token punctuation">,</span>
+              resEntryRef <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>$refs<span class="token punctuation">.</span>resEntry<span class="token punctuation">;</span>
+
+        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>modelComponent<span class="token punctuation">)</span>
+            <span class="token keyword">return</span> console<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span><span class="token string">'[modelManage.vue]: 无法获取型号页面：%o'</span><span class="token punctuation">,</span> curModel<span class="token punctuation">.</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        resEntryRef<span class="token punctuation">.</span><span class="token function">entry</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+            <span class="token literal-property property">page</span><span class="token operator">:</span> modelComponent<span class="token punctuation">,</span>
+            <span class="token literal-property property">breadcrumb</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+                <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">'缺陷规则管理'</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">this</span><span class="token punctuation">.</span>activeIndex <span class="token operator">=</span> index<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br></div></div></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">Last Updated:</span> <span class="time">4/2/2022, 2:59:46 PM</span></div></footer> <!----> </main></div><div class="global-ui"></div></div>
+    <script src="/maisui/assets/js/app.44ceb48a.js" defer></script><script src="/maisui/assets/js/2.ceec1bf4.js" defer></script><script src="/maisui/assets/js/17.dbdebba0.js" defer></script>
+  </body>
+</html>
